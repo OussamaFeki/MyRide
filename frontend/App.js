@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import Passenger from './Passenger';
+import Splash from './Splash';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar />
+      <Splash />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1, // Ensures SafeAreaView uses the full screen height
+    backgroundColor: '#fff', // Set background color for SafeAreaView
+  },
   container: {
-    flex: 1,
+    flex: 1, // Full height for the container
+    justifyContent: 'center', // Optional: Centers Passenger component vertically
+    alignItems: 'center',    // Optional: Centers Passenger component horizontally
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
