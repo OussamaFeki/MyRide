@@ -6,7 +6,7 @@ import GenderInputList from '../../../../components/common/GenderInputList';
 import CustomedButton from '../../../../components/common/CustomedButton';
 import Avatarupload from '../../../../components/common/Avatarupload';
 
-function StepTwo() {
+function StepTwo({navigation}) {
   const [image, setImage] = useState(null);
   const handleImage = () => {
     console.log('upload');
@@ -24,7 +24,7 @@ function StepTwo() {
       <CustomInputText placeholder="Email" type="email" />
       <CustomInputText placeholder="Phone Number" type="phone" />
       <GenderInputList />
-      <CustomedButton title="Continue" />
+      <CustomedButton title="Continue" onPress={()=>navigation.navigate('Location')} />
     </ScrollView>
   );
 }

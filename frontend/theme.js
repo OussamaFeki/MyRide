@@ -8,6 +8,8 @@ export const colors = {
     error: '#e74c3c',
     Primarybutton:'#FFA500',
     secondarybutton:'#fff',
-    secondaryTextButton:'#0000FF'
+    secondaryTextButton:'#0000FF',
+    outlineButton:'#FFEFD5',
+    danger:'#db347b'
   };
   

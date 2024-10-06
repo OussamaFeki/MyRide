@@ -41,10 +41,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    gap:4,
     alignItems: 'center',
   },
   input: {
-    width: 40,
+    width: 50,
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',

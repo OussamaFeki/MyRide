@@ -1,58 +1,61 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { useNavigation, useRoute } from '@react-navigation/native';  // Import useRoute
 import { colors } from '../../theme';
 
 function ButtomBar() {
   const navigation = useNavigation();
-  const [activeTab, setActiveTab] = useState('YourRide'); // Default active tab
+    // Get the current route
+  const [activeTab, setActiveTab] = useState('Inbox');  // Default active tab
 
   const handleTabPress = (tabName) => {
     setActiveTab(tabName);
     navigation.navigate(tabName);
   };
 
+  // Conditionally hide the bottom bar based on the current screen
+  // If the current route name is "DetailScreen", we hide the bottom bar.
+  // if (route.name === 'Chat') {
+  //   return null;
+  // }
+
   return (
     <View style={styles.bottomBar}>
-      <TouchableOpacity style={styles.bottomBarButton} onPress={() => handleTabPress('YourRide')}>
-        <Icon name="bars" size={20}  color={activeTab === 'YourRide' ? colors.Primarybutton : 'gray'} />
-        <Text style={[styles.buttonText, activeTab === 'YourRide' && styles.activeText]}>Your ride</Text>
-      </TouchableOpacity>  
-      <TouchableOpacity 
-        style={styles.bottomBarButton} 
-        onPress={() => handleTabPress('FindRide')}
+      <TouchableOpacity
+        style={styles.bottomBarButton}
+        onPress={() => handleTabPress('Home')}
       >
         <Icon
-          name="search"
+          name="home"
           size={20}
-          color={activeTab === 'FindRide' ? colors.Primarybutton : 'gray'}
+          color={activeTab === 'Home' ? colors.Primarybutton : 'gray'}
+        />
+        <Text style={[styles.buttonText, activeTab === 'Home' && styles.activeText]}>
+          Home
+        </Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
+        style={styles.bottomBarButton}
+        onPress={() => handleTabPress('Order')}
+      >
+        <Icon
+          name="bars"
+          size={20}
+          color={activeTab === 'Order' ? colors.Primarybutton : 'gray'}
         />
         <Text style={[styles.buttonText, activeTab === 'FindRide' && styles.activeText]}>
-          Search
+          My Order
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-        style={styles.bottomBarButton} 
-        onPress={() => handleTabPress('Publish')}
-      >
-        <Icon
-          name="plus"
-          size={20}
-          color={activeTab === 'Publish' ? colors.Primarybutton : 'gray'}
-        />
-        <Text style={[styles.buttonText, activeTab === 'Publish' && styles.activeText]}>
-          Publish
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-        style={styles.bottomBarButton} 
+      <TouchableOpacity
+        style={styles.bottomBarButton}
         onPress={() => handleTabPress('Inbox')}
       >
         <Icon
-          name="comments"
+          name="message1"
           size={20}
           color={activeTab === 'Inbox' ? colors.Primarybutton : 'gray'}
         />
@@ -61,8 +64,8 @@ function ButtomBar() {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-        style={styles.bottomBarButton} 
+      <TouchableOpacity
+        style={styles.bottomBarButton}
         onPress={() => handleTabPress('Profile')}
       >
         <Icon
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   activeText: {
-    color: colors.Primarybutton, // Active tab color
+    color: colors.Primarybutton,  // Active tab color
   },
 });
 

@@ -7,13 +7,19 @@ function StepOne({navigation}) {
     <SafeAreaView style={styles.container}>
         <CustomText text='Add a PIN number to make your account more secure.' position='center'/>
         <View style={styles.choice}>
-          <TouchableOpacity onPress={() => navigation.navigate('StepTwo')}> 
-            <Image source={require('../../../../assets/images/Rider.png')} style={styles.image}/>
+          <TouchableOpacity onPress={() => navigation.navigate('StepTwo')} style={styles.button}> 
+            <Image source={require('../../../../assets/images/Rider.png')} 
+              style={{ width: 140, height: 120 }}
+              resizeMode="contain"
+              />
+              
             <CustomText text='Rider' position='center' color='grey'/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('StepTwo')}> 
-            <Image source={require('../../../../assets/images/passenger.png')} style={styles.image}/>
-            <CustomText text='Rider' position='center' color='grey'/>
+          <TouchableOpacity onPress={() => navigation.navigate('StepTwo')}  style={styles.button}> 
+            <Image source={require('../../../../assets/images/passenger.png')}
+              style={{ width: 140, height: 120 }}
+              resizeMode="contain"/>
+            <CustomText text='Customer' position='center' color='grey'/>
           </TouchableOpacity>
         </View>
     </SafeAreaView>
@@ -30,10 +36,12 @@ const styles=StyleSheet.create({
   choice:{
     flexDirection:'row',
     justifyContent:'space-between',
-    margin:10,
+    gap:10
   },
-  image:{
-    
-  }
+  button: {
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 })
 export default StepOne
