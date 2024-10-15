@@ -1,6 +1,6 @@
 // theme.js
 export const colors = {
-    primary: '#3498db',
+    primary: '#FFA500',
     secondary: '#2ecc71',
     background: '#f5f5f5',
     textPrimary: '#333333',
@@ -10,6 +10,7 @@ export const colors = {
     secondarybutton:'#fff',
     secondaryTextButton:'#0000FF',
     outlineButton:'#FFEFD5',
-    danger:'#db347b'
+    danger:'#db347b',
+    Onred:'red'
   };
   

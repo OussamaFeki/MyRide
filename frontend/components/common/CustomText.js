@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-const CustomText = ({text,position='left',color='black',margin=10}) => {
+const CustomText = ({text,position='left',color='black',margin=10,size='auto'}) => {
     const styles = StyleSheet.create({
         text: {
           margin:margin,
@@ -13,7 +13,7 @@ const CustomText = ({text,position='left',color='black',margin=10}) => {
         },
       });
     return (
-    <Text style={styles.text}>{text}</Text>
+    <Text style={styles.text} fontSize={size}>{text}</Text>
   );
 };
 

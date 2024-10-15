@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import Avatarupload from '../../../../components/common/Avatarupload';
 import CustomText from '../../../../components/common/CustomText';
-import SectionAndItem from '../../../../components/common/SectionAndItem';
+import Section from '../../../../components/common/SectionAndItem';
 
 function Profile() {
   return (
@@ -10,40 +10,45 @@ function Profile() {
       <Avatarupload />
       <CustomText text='User Name' position='center' />
       
-      <SectionAndItem
+      <Section
         icon="user"
         title="Edit Profile"
-        content={['Change Password', 'Update Info', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='EditProfile'
       />
-     <SectionAndItem
+     <Section
         icon="bell"
         title="Notification"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='Notification'
       />
-      <SectionAndItem
+      <Section
         icon="credit-card"
         title="Payment"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='Payment'
       />
-      <SectionAndItem
+      <Section
         icon="shield"
         title="Security"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='Security'
       />
-      <SectionAndItem
+      <Section
         icon="globe"
-        title="language"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        title="Language"
+        next='Language'
       />
-      <SectionAndItem
+      <Section
         icon="lock"
         title="Privacy Police"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='PrivacyPolice'
       />
-      <SectionAndItem
+      <Section
         icon="users"
         title="Invite Friends"
-        content={['Change Password', 'Update Email', 'Delete Account']} // Corrected prop name from "contents" to "content"
+        next='InviteFriends'
+      />
+      <Section
+        icon="log-out"
+        title="Log out"
+        next='Log out'
       />
     </ScrollView>
   );

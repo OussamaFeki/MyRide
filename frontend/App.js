@@ -6,6 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashStaks from './navigation/stacks/SplashStaks';
 import ChatsCallsStacks from './navigation/stacks/Chats&CallsStacks';
+import OnboardingStacks from './navigation/stacks/OnboardingStacks';
+import Login_SignupStacks from './navigation/stacks/Login_SignupStacks';
+import Forget_passwordStacks from './navigation/stacks/Forget_passwordStacks';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -13,9 +16,12 @@ export default function App() {
     <NavigationContainer>
        <SafeAreaView style={styles.safeArea}>
           <StatusBar />
-          <Stack.Navigator initialRouteName="Splash">
+          <Stack.Navigator initialRouteName="Onboarding">
+            <Stack.Screen name='Onboarding' component={OnboardingStacks} options={{ headerShown: false }}/>
+            <Stack.Screen name='Login_SignupStacks' component={Login_SignupStacks} options={{ headerShown: false }}/>
             <Stack.Screen name="Splash" component={SplashStaks}  options={{ headerShown: false }} />
             <Stack.Screen name="ChatsCalls" component={ChatsCallsStacks} options={{ headerShown: false }} />
+            <Stack.Screen name="Forget" component={Forget_passwordStacks} options={{ headerShown: false }} />
           </Stack.Navigator>
         </SafeAreaView>
     </NavigationContainer>
