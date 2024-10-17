@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
 import CountryPicker from 'react-native-country-picker-modal';
-import { MaterialIcons } from '@expo/vector-icons'; // Make sure to install react-native-vector-icons or use a similar icon library
+import { MaterialIcons } from '@expo/vector-icons';
 
-function CustomInputText({ placeholder = '', type = 'text', icon = null }) {
+function CustomInputText({ placeholder = '', type = 'text', icon = null, onChangeText, value }) {
   const [countryCode, setCountryCode] = useState('US');
   const [callingCode, setCallingCode] = useState('1');
-
+  
   const getKeyboardType = () => {
     switch (type) {
       case 'date':
@@ -16,7 +16,7 @@ function CustomInputText({ placeholder = '', type = 'text', icon = null }) {
       case 'phone':
         return 'phone-pad';
       default:
-        return 'default'; // for text input or other unspecified types
+        return 'default';
     }
   };
 
@@ -41,6 +41,8 @@ function CustomInputText({ placeholder = '', type = 'text', icon = null }) {
             placeholder={placeholder}
             placeholderTextColor="gray"
             keyboardType={getKeyboardType()}
+            onChangeText={onChangeText} // Use this correctly
+            value={value}
           />
         </View>
       )}
@@ -52,7 +54,9 @@ function CustomInputText({ placeholder = '', type = 'text', icon = null }) {
             placeholder={placeholder}
             placeholderTextColor="gray"
             keyboardType={getKeyboardType()}
-            secureTextEntry={type === 'password'} // Enable secure text entry for password
+            secureTextEntry={type === 'password'}
+            onChangeText={onChangeText} // Use this correctly
+            value={value}
           />
         </View>
       )}
@@ -60,6 +64,7 @@ function CustomInputText({ placeholder = '', type = 'text', icon = null }) {
   );
 }
 
+// Styles remain unchanged
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
@@ -78,14 +83,12 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: '100%',
-    borderColor: 'transparent',
     backgroundColor: '#eaeaea',
-    borderWidth: 1,
     padding: 10,
     borderRadius: 4,
   },
   icon: {
-   
+    marginRight: 5,
   },
   phoneInputContainer: {
     flexDirection: 'row',
