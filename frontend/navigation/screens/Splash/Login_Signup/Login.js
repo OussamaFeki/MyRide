@@ -11,6 +11,7 @@ import AppleLogo from '../../../../assets/icons/Apple.png';
 import SpecialLoginButtonMini from '../../../../components/common/SpecialLoginButtonMini';
 import { colors } from '../../../../theme';
 import UserService from '../../../../services/UserService';
+import userService from '../../../../api/userService';
 
 function Login({ navigation }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -27,13 +28,14 @@ function Login({ navigation }) {
     setLoading(true);
     try {
       const loginData = { email, password };
-      const response = await userService.loginUser(loginData);
+      const response = await UserService.loginUser(JSON.stringify(loginData));
       
       // Check the response
       console.log('Login successful:', response);
       Alert.alert('Success', 'Logged in successfully');
       navigation.navigate('ChatsCalls');
     } catch (error) {
+      console.log(error)
       Alert.alert('Error', 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);

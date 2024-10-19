@@ -1,34 +1,30 @@
-// api/userService.js
+import axios from 'axios';
 import api from './api';
 
+const baseURL = 'http://192.168.100.98:3008';
 const userService = {
   createUser: (userData) => 
-    api.post('/users', userData, {
+    axios.post(`${baseURL}/users`, userData, {
       headers: {
-        'Accept': '*/*',
         'Content-Type': 'application/json',
       },
     }),  // Create a new user
 
   loginUser: (loginData) => 
-    api.post('/users/login', loginData),  // Log in a user
+    axios.post(`${baseURL}/users/login`, loginData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }),  // Log in a user
 
   getUserById: (id) => 
-    api.get(`/users/${id}`),  // Fetch a user by ID
+    axios.get(`${baseURL}/users/${id}`),  // Fetch a user by ID
 
   getAllUsers: () => 
-    api.get('/users', {
-      headers: {
-        'Accept': '*/*',
-      },
-    }),  // Fetch all users
+    axios.get(`${baseURL}/users`),  // Fetch all users
 
   deleteUser: (id) => 
-    api.delete(`/users/${id}`, {
-      headers: {
-        'Accept': '*/*',
-      },
-    }),  // Delete a user by ID
+    axios.delete(`${baseURL}/users/${id}`),  // Delete a user by ID
 };
 
 export default userService;
