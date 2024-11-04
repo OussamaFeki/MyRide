@@ -1,0 +1,163 @@
+@startuml
+class User #LightSeaGreen {
+  +id: Long
+  +name: String
+  +email: String
+  +encryptedPassword: String
+  +phoneNumber: String
+  +profilePictureUrl: Image
+  +userType: UserType
+  +address: Address
+}
+
+class Address #LightSeaGreen {
+  +street: String
+  +city: String
+  +state: String
+  +zipCode: String
+  +country: String
+}
+
+class Location #LightSeaGreen {
+  +latitude: Double
+  +longitude: Double
+  +fullAddress: String
+}
+
+class Rider #LightSeaGreen {
+  +licenseCard: Verification
+}
+
+class Verification #LightSeaGreen  {
+  +id: Long
+  +documentNumber: String
+  +documentImageUrl: Image
+  +selfieWithDocumentUrl: Image
+  +verificationStatus: VerificationStatus
+  +verificationDate: Date
+  +verifiedBy: String
+}
+
+class Customer #LightSeaGreen{
+    +cinCard: Verification
+}
+
+class Car #LightSeaGreen{
+  +id: Long
+  +licensePlate: String
+  +make: String
+  +model: String
+  +year: Int
+  +capacity: Int
+  +owner: Rider
+}
+
+class Ride #LightSeaGreen {
+  +id: Long
+  +startLocation: Location
+  +endLocation: Location
+  +rideDate: Date
+  +rideTime: Time
+  +availableSeats: Int
+  +pricePerSeat: Float
+  +driver: Rider
+  +car: Car
+}
+
+class Booking #LightSeaGreen {
+  +id: Long
+  +ride: Ride
+  +passenger: Customer
+  +seatCount: Int
+  +totalPrice: Float
+  +status: BookingStatus
+}
+
+class Rating #LightSeaGreen {
+  +id: Long
+  +ride: Ride
+  +rater: User
+  +ratee: User
+  +score: Int
+  +comment: String
+  +ratingDate: Date
+}
+
+class Message #LightSeaGreen {
+  +id: Long
+  +sender: User
+  +receiver: User
+  +content: String
+  +timestamp: Date
+  +status: MessageStatus
+}
+
+class Image #LightSeaGreen {
+  +id: Long
+  +url: String
+  +uploadedAt: Date
+  +updatedAt: Date
+  +imageType: ImageType
+  +visibility: Bool
+}
+
+enum ImageType{
+  PROFILE
+  DOCUMENT
+  CAR
+}
+
+enum UserType {
+  RIDER
+  CUSTOMER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum MessageStatus {
+  SENT
+  READ
+}
+
+' Waiting for verification (initial state)
+' Good detection by AI (automated status)
+' Final approval by support team
+' Rejected by support team or failed AI verification
+
+enum VerificationStatus {
+  EN_ATTENTE
+  VERIFIED
+  APPROUVE
+  REJECTED
+}
+
+' Relationships
+Customer "1" -- "1" Verification: hasCin
+Rider "1" --* "1" Verification : hasLicence
+User "1" -- "1" Address #LightSeaGreen: has
+
+User "1" -- "0..*" Image #LightSeaGreen : uploads
+Car "1" -- "1" Image #LightSeaGreen : carImage
+Verification "1" -- "1" Image: documentImage
+Verification "1" -- "1" Image: selfieWithDocument
+
+User <|-- Rider #LightSeaGreen
+User <|-- Customer #LightSeaGreen
+Rider "1" -- "0..*" Car #LightSeaGreen : owns
+Rider "1" -- "0..*" Ride #LightSeaGreen : creates 
+Ride "0..*" -- "1" Car #LightSeaGreen : uses
+Ride "1" -- "0..*" Booking #LightSeaGreen : hasBookings
+Customer "0..*" -- "0..*" Booking #LightSeaGreen : books
+Ride "1" -- "0..*" Rating #LightSeaGreen : receives
+User "1" -- "0..*" Rating #LightSeaGreen : givesRating
+User "1" -- "0..*" Rating #LightSeaGreen : receivesRating
+User "1" -- "0..*" Message #LightSeaGreen : sends
+User "1" -- "0..*" Message #LightSeaGreen : receives
+Ride "1" -- "1" Location #LightSeaGreen : startLocation
+Ride "1" -- "1" Location #LightSeaGreen : endLocation
+@enduml
