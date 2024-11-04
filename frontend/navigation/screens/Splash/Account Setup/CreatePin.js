@@ -10,13 +10,21 @@ import {
 import PinInput from '../../../../components/common/PinInput';
 import CustomedButton from '../../../../components/common/CustomedButton';
 
-function CreatePin({navigation}) {
+function CreatePin({ navigation, userData, updateUserData }){
   const [pin, setPin] = useState('');
 
   const handlePinChange = (newPin) => {
     setPin(newPin);
     console.log('Entered PIN:', newPin);
   };
+
+  const handleContinue = () => {
+    // Update user data with the new PIN
+    updateUserData({ pin });
+    // Navigate to the next screen
+    navigation.navigate('SetFinger');
+  };
+
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -31,7 +39,7 @@ function CreatePin({navigation}) {
         </View>
         {/* Place the button outside the scrolling view */}
         <View style={styles.buttonContainer}>
-          <CustomedButton title="Continue" onPress={() => navigation.navigate('SetFinger')}  /> 
+        <CustomedButton title="Continue" onPress={handleContinue} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

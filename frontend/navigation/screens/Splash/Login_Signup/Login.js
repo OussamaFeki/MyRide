@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import CustomInputText from '../../../../components/common/CustomInputText';
 import CustomTitle from '../../../../components/common/CustomTitle';
 import CheckBox from 'react-native-check-box';
@@ -11,7 +12,6 @@ import AppleLogo from '../../../../assets/icons/Apple.png';
 import SpecialLoginButtonMini from '../../../../components/common/SpecialLoginButtonMini';
 import { colors } from '../../../../theme';
 import UserService from '../../../../services/UserService';
-import userService from '../../../../api/userService';
 
 function Login({ navigation }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -24,24 +24,25 @@ function Login({ navigation }) {
       Alert.alert('Error', 'Please enter both email and password');
       return;
     }
-  
+
     setLoading(true);
     try {
       const loginData = { email, password };
       const response = await UserService.loginUser(JSON.stringify(loginData));
-      
-      // Check the response
+
+      // Stringify the response data before storing it in AsyncStorage
+      await AsyncStorage.setItem('userToken', JSON.stringify(response)); // Saving as a string
+
       console.log('Login successful:', response);
       Alert.alert('Success', 'Logged in successfully');
       navigation.navigate('ChatsCalls');
     } catch (error) {
-      console.log(error)
+      console.log(error);
       Alert.alert('Error', 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
   };
-  
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -51,14 +52,14 @@ function Login({ navigation }) {
           placeholder="Email"
           icon="email"
           value={email}
-          onChangeText={text=>setEmail(text)} // Ensure you use onChangeText prop
+          onChangeText={text => setEmail(text)}
         />
         <CustomInputText
           placeholder="Password"
           type="password"
           icon="lock"
           value={password}
-          onChangeText={text=>setPassword(text)} // Ensure you use onChangeText prop
+          onChangeText={text => setPassword(text)}
         />
         <View style={styles.underform}>
           <View style={styles.checkbox}>

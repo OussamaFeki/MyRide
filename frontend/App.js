@@ -22,6 +22,7 @@ export default function App() {
             <Stack.Screen name="Splash" component={SplashStaks}  options={{ headerShown: false }} />
             <Stack.Screen name="ChatsCalls" component={ChatsCallsStacks} options={{ headerShown: false }} />
             <Stack.Screen name="Forget" component={Forget_passwordStacks} options={{ headerShown: false }} />
+            <Stack.Screen name="setupAccount" component={SplashStaks} options={{ headerShown: false }} />
           </Stack.Navigator>
         </SafeAreaView>
     </NavigationContainer>

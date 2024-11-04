@@ -4,7 +4,7 @@ import api from './api';
 const baseURL = 'http://192.168.100.98:3008';
 const userService = {
   createUser: (userData) => 
-    axios.post(`${baseURL}/users`, userData, {
+    axios.post(`${baseURL}/users`, JSON.stringify(userData), {
       headers: {
         'Content-Type': 'application/json',
       },

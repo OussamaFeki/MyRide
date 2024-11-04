@@ -4,8 +4,25 @@ import CustomText from './CustomText';
 import CustomedButton from './CustomedButton';
 import { colors } from '../../theme';
 import HorizontalDivider from './HorizontalDivider';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
-function LogoutModal({ modalVisible, press,navigation }) {
+function LogoutModal({ modalVisible, press }) {
+  const navigation = useNavigation();
+
+  const handleLogout = async () => {
+    try {
+      // Remove the userToken from AsyncStorage
+      await AsyncStorage.removeItem('userToken');
+      console.log('User token removed successfully');
+      
+      // Navigate to Login page after logging out
+      navigation.navigate('Login_SignupStacks');
+    } catch (error) {
+      console.log('Error removing user token:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Modal
@@ -24,13 +41,13 @@ function LogoutModal({ modalVisible, press,navigation }) {
               color={colors.Primarybutton}
               style={styles.modalTitle}
             />
-            <HorizontalDivider/>
+            <HorizontalDivider />
             <Text style={styles.modalText}>
               Are you sure you want to log out?
             </Text>
             <View style={styles.buttonGroup}>
-            <CustomedButton title='cancel' outline={true} ingroup={true} onPress={() => press()}/>
-            <CustomedButton title='Yes, Logout' ingroup={true} onPress={()=>navigation.navigate('Login_SignupStacks')} />
+              <CustomedButton title="Cancel" outline={true} ingroup={true} onPress={() => press()} />
+              <CustomedButton title="Yes, Logout" ingroup={true} onPress={handleLogout} />
             </View>
           </View>
         </View>
@@ -73,30 +90,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-  },
-  button: {
-    flex: 1,
-    paddingVertical: 12,
-    marginHorizontal: 10,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cancelButton: {
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderWidth: 1,
-  },
-  logoutButton: {
-    backgroundColor: colors.Primarybutton,
-  },
-  cancelText: {
-    color: '#333',
-    fontSize: 16,
-  },
-  logoutText: {
-    color: 'white',
-    fontSize: 16,
   },
 });
 
